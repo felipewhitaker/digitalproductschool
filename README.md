@@ -71,6 +71,13 @@ The model was evaluated using the root mean squared error (RMSE), which can be o
 The results can be observed in the image below.
 
 ![](imgs/predictions.png)
+
+## Deployment
+
+This project was deployed on an AWS EC2 instance, using docker-compose. The docker-compose file is available in the repository.
+
+- [ ] Create Github Actions pipeline for deployment
+
 ## Step by Step Instructions 
 
 ### Running Locally
