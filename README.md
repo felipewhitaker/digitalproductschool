@@ -40,9 +40,29 @@ Finally, these transformations result in the data dictionary below:
 
 ## Step by Step Instructions 
 
+### Running Locally
+
 ```bash
 conda create -n dpsenv
 conda activate dpsenv
 # conda env export > environment.yml
 conda env update --file environment.yml
+```
+
+### Running on AWS
+
+```bash
+# example extracted from SSH connect EC2 page 
+ssh -i "dps.pem" ec2-user@ec2-52-201-231-31.compute-1.amazonaws.com
+sudo yum -y install docker
+# from https://stackoverflow.com/a/65478517/14403987
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose version
+# from https://github.com/moby/moby/issues/17645#issuecomment-153291483
+sudo su -
+service docker start
+docker images
+logout # su ec2-user
+docker-compose up
 ```
