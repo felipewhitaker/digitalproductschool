@@ -94,15 +94,14 @@ conda env update --file environment.yml
 ```bash
 # example extracted from SSH connect EC2 page 
 ssh -i "dps.pem" ec2-user@ec2-52-201-231-31.compute-1.amazonaws.com
-sudo yum -y install docker
-# from https://stackoverflow.com/a/65478517/14403987
-sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose version
 # from https://github.com/moby/moby/issues/17645#issuecomment-153291483
 sudo su -
+yum -y install docker
+# from https://stackoverflow.com/a/65478517/14403987
+curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 service docker start
-docker images
 logout # su ec2-user
 docker-compose up
+docker-compose version
 ```

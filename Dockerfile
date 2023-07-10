@@ -1,5 +1,5 @@
 # from https://towardsdatascience.com/how-to-deploy-a-machine-learning-model-with-fastapi-docker-and-github-actions-13374cbd638a
-FROM python:3.10-slim
+FROM https://hub.docker.com/_/python/:3.10-slim
 
 # # from https://stackoverflow.com/a/55032822/14403987
 # # needed for python:3.10.12-alpine3.18
