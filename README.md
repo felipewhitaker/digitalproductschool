@@ -4,3 +4,11 @@
 
 This repository contains what I developed as the AI Track challenge. The challenge is to predict the `total` number of accidents (under `accident_type`) in Munich for the year of 2020.
 
+## Step by Step Instructions 
+
+```bash
+conda create -n dpsenv
+conda activate dpsenv
+# conda env export > environment.yml
+conda env update --file environment.yml
+```
