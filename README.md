@@ -38,6 +38,15 @@ Finally, these transformations result in the data dictionary below:
 | month         | text    | either `Summe` (total) or ends with two digit month (e.g. `03`) |
 | value         | numeric | number of registered occurances                                 |
 
+## Visualization
+
+The time series representation of the download data can be seen below. It is clear the the data has a seasonal component, with a peak in the summer months and a trough in the winter months. Moreover, the data seems to have a trend, with a longer term pattern, with a descrease followed by an increase and then another decrease due to covid lockdowns.
+
+![timeseries representation of data per `accident type`](imgs/timeseries.png)
+
+Another way of observing such patterns is through a seasonal decomposition, which can be observed below. The seasonal component is clear, as well as the trend component. Moreover, the residuals seem to be stationary, which is a good sign for modelling.
+
+![seasonal decompose of `total` `accident type`](imgs/seasonal_decompose.png)
 ## Step by Step Instructions 
 
 ### Running Locally
