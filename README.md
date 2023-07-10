@@ -38,3 +38,11 @@ Finally, these transformations result in the data dictionary below:
 | month         | text    | either `Summe` (total) or ends with two digit month (e.g. `03`) |
 | value         | numeric | number of registered occurances                                 |
 
+## Step by Step Instructions 
+
+```bash
+conda create -n dpsenv
+conda activate dpsenv
+# conda env export > environment.yml
+conda env update --file environment.yml
+```
