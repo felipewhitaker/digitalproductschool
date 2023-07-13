@@ -15,7 +15,7 @@ WORKDIR /app
 EXPOSE 8000
 
 ENTRYPOINT [ "uvicorn" ]
-CMD [ "main:app", "--host", "0.0.0.0" ]
+CMD [ "main:app", "--host", "0.0.0.0",  "--proxy-headers", "--forwarded-allow-ips '*' "]
 
 # RUN pip install fastapi uvicorn spacy
 
