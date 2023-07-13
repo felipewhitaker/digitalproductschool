@@ -1,6 +1,7 @@
 import sys
 from datetime import datetime
 from enum import Enum
+
 from pathlib import Path
 
 import pandas as pd
@@ -10,7 +11,7 @@ sys.modules["models"] = models  # from https://stackoverflow.com/a/2121918/14403
 import pickle
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, Request
 
 
 def get_prediction(model, year: int, month: int):
@@ -19,6 +20,12 @@ def get_prediction(model, year: int, month: int):
         pd.to_datetime(date_str).to_period("M") - model.end_date.to_period("M")
     ).n
     return model.forecast(steps=n_steps)[datetime(year, month, 1)]
+
+
+async def store_ip(request: Request):
+    with open("./ip.txt", "a+") as f:
+        f.write(f"{datetime.now():%F %H:%M:%S}\t{request.client.host}\n")
+    return
 
 
 MODELS_PATH = Path("./src/models/")
@@ -36,7 +43,7 @@ Models = Enum("Models", {key: key for key in MODELS.keys()})
 app = FastAPI()
 
 
-@app.get("/")
+@app.get("/", dependencies=[Depends(store_ip)])
 async def index():
     return {
         "message": (
@@ -48,7 +55,7 @@ async def index():
     }
 
 
-@app.post("/predict/")
+@app.post("/predict/", dependencies=[Depends(store_ip)])
 async def predict(year: int, month: int):
     global MODELS
     # although `Seasonal` was not the best performing model,
@@ -57,7 +64,7 @@ async def predict(year: int, month: int):
     return {"prediction": get_prediction(model, year, month)}
 
 
-@app.post("/predict/{model_name}")
+@app.post("/predict/{model_name}", dependencies=[Depends(store_ip)])
 async def predict(model_name: Models, year: int, month: int):
     global MODELS
     return {"prediction": get_prediction(MODELS[model_name.value], year, month)}
