@@ -49,8 +49,8 @@ async def index():
         "message": (
             "Hi there! This was developed by Felipe Whitaker "
             "for Digital Product School 2023 challenge. Make a "
-            "POST request to `/predict` to receive a `'prediction'` "
-            "on the total accidents in Munich"
+            "POST request to `/predict` with `year` and `month`  keys"
+            "to receive a `prediction` on the total accidents in Munich"
         )
     }
 
